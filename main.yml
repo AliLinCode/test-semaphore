@@ -31,3 +31,30 @@
           Mount: {{ mount.mount }}
           Size: {{ mount.size_total/1024/1024/1024 }} GB
           {% endfor %}
+   - name: Display system information
+      debug:
+        msg: |
+          System Info:
+          ------------
+          Hostname: {{ ansible_hostname }}
+          FQDN: {{ ansible_fqdn }}
+          Distribution: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          Architecture: {{ ansible_architecture }}
+          Processor: {{ ansible_processor[1] }}
+          Memory: {{ ansible_memtotal_mb }} MB
+          
+          Network Info:
+          -------------
+          {% for interface in ansible_interfaces %}
+          Interface: {{ interface }}
+          {% if ansible_facts[interface]['ipv4'] is defined %}
+          IPv4: {{ ansible_facts[interface]['ipv4']['address'] }}
+          {% endif %}
+          {% endfor %}
+          
+          Storage Info:
+          -------------
+          {% for mount in ansible_mounts %}
+          Mount: {{ mount.mount }}
+          Size: {{ mount.size_total/1024/1024/1024 }} GB
+          {% endfor %}
