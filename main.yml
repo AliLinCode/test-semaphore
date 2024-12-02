@@ -1,3 +1,4 @@
+---
 - name: Gather and display system information
   hosts: test
   gather_facts: yes
@@ -6,7 +7,7 @@
     - name: Display system information
       debug:
         msg: |
-           System Info:
+          System Info:
           ------------
           Hostname: {{ ansible_hostname }}
           FQDN: {{ ansible_fqdn }}
@@ -14,7 +15,7 @@
           Architecture: {{ ansible_architecture }}
           Processor: {{ ansible_processor[1] }}
           Memory: {{ ansible_memtotal_mb }} MB
-         
+          
           Network Info:
           -------------
           {% for interface in ansible_interfaces %}
@@ -23,7 +24,7 @@
           IPv4: {{ ansible_facts[interface]['ipv4']['address'] }}
           {% endif %}
           {% endfor %}
-         
+          
           Storage Info:
           -------------
           {% for mount in ansible_mounts %}
