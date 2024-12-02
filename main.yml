@@ -31,7 +31,7 @@
           Mount: {{ mount.mount }}
           Size: {{ mount.size_total/1024/1024/1024 }} GB
           {% endfor %}
-   - name: Display system information
+    - name: Display system information
       debug:
         msg: |
           System Info:
